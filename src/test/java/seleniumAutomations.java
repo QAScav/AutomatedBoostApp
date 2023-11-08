@@ -55,8 +55,20 @@ public class seleniumAutomations {
         driver.quit();
     }
     @Test
-    public void OpenChallenges() {
+    public void CreateChallenge() {
         Click(driver, By.cssSelector(".mat-list > a:nth-child(3)"));
+        Click(driver, By.cssSelector(".col-lg-12 > button:nth-child(1)"));
+        sendKeys(driver, By.cssSelector("#mat-input-0"), "AutomatedTest Challenge");
+        sendKeys(driver, By.cssSelector("#mat-input-1"), "This challenge should be deleted after the test is over.");
+        sendKeys(driver, By.cssSelector("#mat-input-2"), "https://www.google.com/url?sa=i&url=https%3A%2F%2Fconnect.redhat.com%2Fen%2Fblog%2Fleading-automation-0&psig=AOvVaw0AN5tzT0tJehVjkBsr4dCJ&ust=1699547016110000&source=images&cd=vfe&opi=89978449&ved=0CB");
+        Click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(5)"));
+        Click(driver, By.cssSelector(".modal-footer > button:nth-child(1)"));
+        Click(driver, By.cssSelector("app-challenge-view.ng-star-inserted:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(1)"));
+        Click(driver, By.cssSelector(".mat-warn"));
+        Click(driver, By.cssSelector(".dialog-confirm > btn-container:nth-child(4) > button:nth-child(1)"));
+        String actual = textInElement(driver, By.cssSelector("p.ng-star-inserted"));
+        String expected = "Challenge AutomatedTest Challenge has been deleted!";
+        assertEquals(expected, actual);
     }
 
     @Test
