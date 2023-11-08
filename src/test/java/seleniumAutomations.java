@@ -18,7 +18,6 @@ public class seleniumAutomations {
     WebDriver driver;
     WebDriverWait wait;
 
-
     public void sendKeys(WebDriver driver, By by, String text) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -32,6 +31,13 @@ public class seleniumAutomations {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
         element.click();
+    }
+
+    public String textInElement(WebDriver driver, By by){
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+        return element.getText();
     }
 
     @Before
@@ -61,5 +67,9 @@ public class seleniumAutomations {
         Click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(3)"));
         Click(driver, By.cssSelector(".modal-footer > mat-button:nth-child(1)"));
         Click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(3)"));
+
+        String actual = textInElement(driver, By.cssSelector("div.ng-star-inserted:nth-child(3)"));
+        String expected = "Jesper Eriksson keyboard_arrow_down";
+        assertEquals(expected, actual);
     }
 }
