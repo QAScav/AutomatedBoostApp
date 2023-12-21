@@ -26,8 +26,7 @@ public class seleniumAutomations {
     public void waitForTextInElement(By locator, String expectedText) {
         //As of now the site refreshes automatically once because it first loads without a logged in user,
         // and then with whatever user is cached, this function is used ONCE in the very start to verify that the site
-        // is done refreshing before continuing with the rest of the tests.
-
+        // is done refreshing before continuing with the rest of the tests
         // "expectedText" NEEDS TO BE CHANGED TO MATCH YOUR ACCOUNT NAME OTHERWISE IT WILL GET STUCK
         // might be able to make this generic depending on if there's text there at all pre-refresh
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -52,7 +51,6 @@ public class seleniumAutomations {
         // useful for assertions
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
-
         return element.getText();
     }
 
@@ -66,7 +64,6 @@ public class seleniumAutomations {
         WebElement divElement = wait.until(ExpectedConditions.presenceOfElementLocated(divLocator));
         WebElement buttonElement = divElement.findElement(BtnLocator);
         buttonElement.click();
-
     }
 
     @Before
@@ -76,7 +73,7 @@ public class seleniumAutomations {
         edgeOptions.addArguments("--remote-allow-origins=*", "--ignore-certificate-errors");
         driver = new EdgeDriver(edgeOptions);
         driver.manage().window().maximize();
-        driver.get("https://nexerboostappadmin.azurewebsites.net/home");
+        driver.get("****");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         waitForTextInElement(By.className("ng-star-inserted"), "Jesper Eriksson");
     }
@@ -112,7 +109,7 @@ public class seleniumAutomations {
         click(driver, By.cssSelector(".modal-footer > mat-button:nth-child(1)"));
         click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(3)"));
         String actual = textInElement(driver, By.cssSelector("div.ng-star-inserted:nth-child(3)"));
-        String expected = "Jesper Eriksson keyboard_arrow_down";
+        String expected = "****";
         assertEquals(expected, actual);
     }
     @Test
@@ -137,10 +134,8 @@ public class seleniumAutomations {
         click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(2)"));
         click(driver, By.cssSelector(".modal-footer > button:nth-child(2)"));
     }
-
     @Test
     public void EditChallenges() {
-
         click(driver, By.cssSelector(".mat-list > a:nth-child(3)"));
         click(driver, By.cssSelector("app-challenge-view.ng-star-inserted:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(1)"));
         clear(driver,By.cssSelector("#title"));
@@ -153,11 +148,9 @@ public class seleniumAutomations {
         String actual = textInElement(driver,By.cssSelector("app-challenge-view.ng-star-inserted:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)"));
         String expected = "Dance All Night";
         assertEquals(expected, actual);
-
-
     }
     @Test
-    //
+    //Test is non-functional, as the list can't be easily navigated
     public void CreateTeam() throws InterruptedException {
         String teamName = "Team Selenium";
         click(driver, By.cssSelector(".mat-list > a:nth-child(2)"));
@@ -170,24 +163,6 @@ public class seleniumAutomations {
         click(driver, By.cssSelector("#mat-dialog-2 > app-basic-dialog > div > div.mat-dialog-actions > button"));
         click(driver, By.xpath("/html/body/app-root/app-main-nav/mat-sidenav-container/mat-sidenav-content/div/app-competition/div[2]/div/div[1]/app-competition-view/div/div[3]/button[2]"));
         BAfuncFindingTeam(teamName, By.className("mat-focus-indicator"));
-        Thread.sleep(60000);
 
-
-        //Kollar efter panel med samma namn som som teamet som nyss skapat, när den är hittad, leta efter knapp i den
-        // i den klassen och tryck på den
-        //div.team:nth-child(4) > div:nth-child(1) > div:nth-child(2) > button:nth-child(2)
     }
-
 }
-//  @Test
-//   public void NotifTest(){
-//        //find out where notifs are displayed
-//        //Ask someone familiar with JS how to scroll down in the small overlay window
-//        click(driver, By.cssSelector(".mat-list > a:nth-child(4)"));
-//        sendKeys(driver, By.cssSelector("#mat-input-3"), "Disregard, automated message");
-//        click(driver, By.cssSelector("#mat-slide-toggle-3"));
-//        click(driver, By.cssSelector("#mat-select-0"));
-//
-//
-//        sendKeys(driver, By.cssSelector("#mat-input-1"), "Automated test ran in Selenium to the test notification functionality, disregard or contact tester if you have questions");
-//        click(driver, By.cssSelector("button.mat-focus-indicator:nth-child(4)"));
